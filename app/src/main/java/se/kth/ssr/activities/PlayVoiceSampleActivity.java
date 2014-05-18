@@ -24,7 +24,7 @@ import se.kth.ssr.models.VoiceSample;
  */
 public class PlayVoiceSampleActivity extends Activity {
 
-    private static final String VOICE_SAMPLE_BUNDLE_KEY = "se.kth.ssr.activities.VOICE_SAMPLE_BUNDLE_KEY";
+    private static final String VOICE_SAMPLE_BUNDLE_KEY = "VOICE_SAMPLE_BUNDLE_KEY";
     private static final int DEFAULT_AUDIO_TRACK_SAMPLE_RATE = 16000; // 44.1 kHz
 
     public static final int BUFFER_SIZE = 5120000;
@@ -98,19 +98,8 @@ public class PlayVoiceSampleActivity extends Activity {
         }
 
         private void playAudioTrackFromSample(VoiceSample sample) throws IOException {
-
             AudioTrack result = mAudioTrack;
             File file = sample.getFile();
-
-            String name = file.getName();
-            Log.d(TAG, "FILE we are reading :: " + name);
-
-            boolean canRead = file.canRead();
-            Log.d(TAG, "can we read the file? " + canRead);
-
-            long length = file.length();
-            Log.d(TAG, "file length ? " + length);
-
             if (file.canRead()) {
 
                 InputStream is = new FileInputStream(file);
@@ -122,19 +111,13 @@ public class PlayVoiceSampleActivity extends Activity {
                 byte[] s = new byte[(int)file.length()];
 
                 int offset = 0;
-//                mAudioTrack.play();
                 while((i = dis.read(s, 0, s.length)) > -1){
-
                     mAudioTrack.write(s, offset, i);
                     offset = offset + i;
 
                     Log.d (TAG, "read " + i + " bytes");
                     Log.d (TAG, "offset = " + offset);
                 }
-//                                mAudioTrack.play();
-//                mAudioTrack.stop();
-//                mAudioTrack.release();
-
 
                 dis.close();
                 is.close();

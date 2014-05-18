@@ -10,5 +10,6 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_select_voice">Select Voice Sample</string>
     <string name="record">Record!</string>
+    <string name="fragment">Fragment!</string>
 
 </resources>

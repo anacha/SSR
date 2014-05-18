@@ -11,7 +11,6 @@ import android.widget.Button;
 import java.io.IOException;
 
 import se.kth.ssr.R;
-import se.kth.ssr.utils.DataRepository;
 
 /**
  * Created by argychatzi on 4/6/14.
@@ -19,7 +18,11 @@ import se.kth.ssr.utils.DataRepository;
 public class RecordingActivity extends Activity {
 
     public static final String DIRECTORY_OF_RECORDINGS_KEY = "DIRECTORY_OF_RECORDINGS_KEY";
+    public static final int DEFAULT_NUM_OF_PIECES = 10;
+
     private static final String TAG = "RecordingActivity";
+    private static final String FILE_NAME = "/recording.3gp";
+
     private MediaRecorder mRecorder = null;
     private boolean mIsRecording = false;
     private String mDirectoryOfRecordings;
@@ -40,7 +43,6 @@ public class RecordingActivity extends Activity {
         Bundle extras = getIntent().getExtras();
         mDirectoryOfRecordings = extras.getString(DIRECTORY_OF_RECORDINGS_KEY);
 
-
         Button recordButton = (Button) findViewById(R.id.record_btn);
         recordButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +53,16 @@ public class RecordingActivity extends Activity {
                     stopRecording();
                 }
                 mIsRecording = !mIsRecording;
+            }
+        });
+
+
+        Button breakToPiecesButton = (Button) findViewById(R.id.pieces_btn);
+        breakToPiecesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent breakSampleToPiecesIntent = BreakSampleToPiecesActivity.getLaunchIntent(RecordingActivity.this, FILE_NAME, DEFAULT_NUM_OF_PIECES);
+                startActivity(breakSampleToPiecesIntent);
             }
         });
     }
@@ -64,13 +76,12 @@ public class RecordingActivity extends Activity {
         }
     }
 
-
     private void startRecording(String recordDirName) {
         mRecorder = new MediaRecorder();
         mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
 
-        mRecorder.setOutputFile(recordDirName + "/recording.3gp");
+        mRecorder.setOutputFile(recordDirName + FILE_NAME);
         mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
 
         try {
