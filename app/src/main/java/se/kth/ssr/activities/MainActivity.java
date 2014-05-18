@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import se.kth.ssr.R;
+import se.kth.ssr.utils.Configuration;
 
 
 public class MainActivity extends Activity {
@@ -29,7 +30,9 @@ public class MainActivity extends Activity {
         launchRecordingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent startRecordingIntent = RecordingActivity.getLaunchIntent(MainActivity.this);
+                Configuration repository = Configuration.getInstance(MainActivity.this);
+                String path = repository.getBaseHomeDirectory();
+                Intent startRecordingIntent = RecordingActivity.getLaunchIntent(MainActivity.this, path);
                 startActivity(startRecordingIntent);
             }
         });

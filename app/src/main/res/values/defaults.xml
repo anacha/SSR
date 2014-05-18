@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer name="default_number_of_pieces">10</integer>
+
+    <string name="default_path"></string>
+
+</resources>
