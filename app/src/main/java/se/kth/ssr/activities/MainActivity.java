@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import se.kth.ssr.R;
 import se.kth.ssr.utils.Configuration;
-
+import se.kth.ssr.utils.DefaultConfiguration;
 
 public class MainActivity extends Activity {
 
@@ -21,7 +21,7 @@ public class MainActivity extends Activity {
         viewRecordingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent selectVoiceIntent = SelectVoiceActivity.getLaunchIntent(MainActivity.this);
+                Intent selectVoiceIntent = ViewDirectoryActivity.getLaunchIntent(MainActivity.this);
                 startActivity(selectVoiceIntent);
             }
         });
@@ -30,12 +30,11 @@ public class MainActivity extends Activity {
         launchRecordingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Configuration repository = Configuration.getInstance(MainActivity.this);
-                String path = repository.getBaseHomeDirectory();
+                Configuration configuration = DefaultConfiguration.getInstance(MainActivity.this);
+                String path = configuration.getBaseHomeDirectory();
                 Intent startRecordingIntent = RecordingActivity.getLaunchIntent(MainActivity.this, path);
                 startActivity(startRecordingIntent);
             }
         });
-
     }
 }

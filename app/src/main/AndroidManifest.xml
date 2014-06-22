@@ -21,20 +21,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="se.kth.ssr.activities.VoiceTokenizerActivity"
-            android:label="@string/title_activity_voice_tokenizer" >
-        </activity>
-        <activity
-            android:name="se.kth.ssr.activities.SelectVoiceActivity"
+            android:name=".activities.ViewDirectoryActivity"
             android:label="@string/title_activity_select_voice" >
         </activity>
 
         <activity
-            android:name="se.kth.ssr.activities.PlayVoiceSampleActivity"
+            android:name=".activities.PlayRecordingActivity"
             android:label="@string/title_activity_select_voice" >
         </activity>
         <activity
             android:name="se.kth.ssr.activities.RecordingActivity"
+            android:label="@string/title_activity_select_voice" >
+        </activity>
+        <activity
+            android:name="se.kth.ssr.activities.BreakRecordingToPiecesActivity"
             android:label="@string/title_activity_select_voice" >
         </activity>
 

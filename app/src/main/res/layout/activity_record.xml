@@ -15,7 +15,7 @@
 
     <Button
         android:id="@+id/pieces_btn"
-        android:text="@string/record"
+        android:text="@string/break_to_pieces"
         android:layout_margin="@dimen/activity_vertical_margin"
         android:layout_width="match_parent"
         android:layout_height="@dimen/default_button_height" />
