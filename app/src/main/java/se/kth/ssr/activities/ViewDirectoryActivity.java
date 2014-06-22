@@ -42,7 +42,7 @@ public class ViewDirectoryActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Recording sampleSelected = samples.get(position);
-                Intent playSampleIntent = PlayRecordingActivity.getLaunchIntent(ViewDirectoryActivity.this, sampleSelected);
+                Intent playSampleIntent = PlayRecordingActivityDefault.getLaunchIntent(ViewDirectoryActivity.this, sampleSelected);
                 startActivity(playSampleIntent);
             }
         });

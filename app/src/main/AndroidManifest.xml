@@ -26,15 +26,15 @@
         </activity>
 
         <activity
-            android:name=".activities.PlayRecordingActivity"
+            android:name=".activities.PlayRecordingActivityDefault"
             android:label="@string/title_activity_select_voice" >
         </activity>
         <activity
-            android:name="se.kth.ssr.activities.RecordingActivity"
+            android:name=".activities.RecordingActivityDefault"
             android:label="@string/title_activity_select_voice" >
         </activity>
         <activity
-            android:name="se.kth.ssr.activities.BreakRecordingToPiecesActivity"
+            android:name=".activities.BreakRecordingToPiecesActivityDefault"
             android:label="@string/title_activity_select_voice" >
         </activity>
 

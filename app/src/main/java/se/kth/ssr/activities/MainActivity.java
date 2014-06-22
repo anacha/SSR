@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 Configuration configuration = DefaultConfiguration.getInstance(MainActivity.this);
                 String path = configuration.getBaseHomeDirectory();
-                Intent startRecordingIntent = RecordingActivity.getLaunchIntent(MainActivity.this, path);
+                Intent startRecordingIntent = RecordingActivityDefault.getLaunchIntent(MainActivity.this, path);
                 startActivity(startRecordingIntent);
             }
         });

@@ -15,28 +15,25 @@ import java.util.Date;
 import se.kth.ssr.R;
 import se.kth.ssr.models.Recording;
 import se.kth.ssr.utils.DefaultConfiguration;
+import se.kth.ssr.utils.configurations.RecorderConfiguration;
 
 /**
  * Created by argychatzi on 4/6/14.
  */
-public class RecordingActivity extends Activity {
-
-    public static final String DIRECTORY_OF_RECORDINGS_KEY = "DIRECTORY_OF_RECORDINGS_KEY";
+public class RecordingActivityDefault extends DefaultConfigurationActivity {
 
     private static final String TAG = "RecordingActivity";
     private static final String FILE_NAME = "/recording";
-    private static final String FILE_POST_FIX = "";
+    private static final String FILE_POST_FIX = ".3gp";
 
     private String mRecordingName = FILE_NAME + String.valueOf(new Date().getTime()) + FILE_POST_FIX;
     private MediaRecorder mRecorder = null;
     private boolean mIsRecording = false;
-    private String mDirectoryOfRecordings;
     private Recording mRecordingResult;
 
     public static Intent getLaunchIntent(Activity activity, String directoryOfRecordings) {
-        Intent intent = new Intent(activity, RecordingActivity.class);
+        Intent intent = new Intent(activity, RecordingActivityDefault.class);
         Bundle bundle = new Bundle();
-        bundle.putString(DIRECTORY_OF_RECORDINGS_KEY, directoryOfRecordings);
         intent.putExtras(bundle);
         return intent;
     }
@@ -46,21 +43,19 @@ public class RecordingActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record);
 
-        Bundle extras = getIntent().getExtras();
-        mDirectoryOfRecordings = extras.getString(DIRECTORY_OF_RECORDINGS_KEY);
-
         Button recordButton = (Button) findViewById(R.id.record_btn);
         recordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!mIsRecording) {
-                    if(mRecorder == null){
-                        mRecorder = initRecorder(mDirectoryOfRecordings);
+                    if (mRecorder == null) {
+                        RecorderConfiguration configuration = getConfiguration();
+                        mRecorder = initRecorder(configuration);
                     }
                     mRecorder.start();
                 } else {
                     mRecordingResult = stopRecording();
-                    breakRecordingToFragments(RecordingActivity.this, mRecordingResult);
+                    breakRecordingToFragments(RecordingActivityDefault.this, mRecordingResult);
                 }
                 mIsRecording = !mIsRecording;
             }
@@ -76,16 +71,15 @@ public class RecordingActivity extends Activity {
         }
     }
 
-    private MediaRecorder initRecorder(String recordDirName){
+    private MediaRecorder initRecorder(RecorderConfiguration configuration) {
         MediaRecorder recorder = new MediaRecorder();
-        recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-        recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-        recorder.setAudioSamplingRate(DefaultConfiguration.getInstance(this).getSamplingRate());
+        recorder.setAudioSource(configuration.getAudioSource());
+        recorder.setOutputFormat(configuration.getOutputFormat());
+        recorder.setAudioSamplingRate(DefaultConfiguration.getInstance(this).getSamplingRateInHz());
 
-        String recordingAbsolutePath = recordDirName + mRecordingName;
-        Log.d(TAG, "recordingAbsolutePath " +  recordingAbsolutePath);
-        recorder.setOutputFile(recordingAbsolutePath);
-        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_WB);
+        mRecordingName = configuration.getBaseHomeDirectory() + mRecordingName;
+        recorder.setOutputFile(mRecordingName);
+        recorder.setAudioEncoder(configuration.getAudioEncoder());
 
         try {
             recorder.prepare();
@@ -103,7 +97,7 @@ public class RecordingActivity extends Activity {
     }
 
     private void breakRecordingToFragments(Context context, Recording recording) {
-        Intent intent = BreakRecordingToPiecesActivity.getLaunchIntent(context, recording);
+        Intent intent = BreakRecordingToPiecesActivityDefault.getLaunchIntent(context, recording);
         startActivity(intent);
     }
 }

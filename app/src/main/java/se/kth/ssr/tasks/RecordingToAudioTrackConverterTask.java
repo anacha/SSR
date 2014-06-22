@@ -1,7 +1,5 @@
 package se.kth.ssr.tasks;
 
-import android.media.AudioFormat;
-import android.media.AudioManager;
 import android.media.AudioTrack;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -13,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import se.kth.ssr.models.Recording;
+import se.kth.ssr.utils.Configuration;
 
 /**
  * Created by argychatzi on 6/22/14.
@@ -46,7 +45,8 @@ public class RecordingToAudioTrackConverterTask extends AsyncTask<Recording, Voi
     }
 
     private AudioTrack convertRecordingToAudioTrack(Recording sample) throws IOException {
-        AudioTrack audioTrack = prepareAudioTrack();
+        Configuration configuration = mHolder.getConfiguration();
+        AudioTrack audioTrack = prepareAudioTrack(configuration);
         File file = sample.getFile();
         if (file.canRead()) {
 
@@ -55,13 +55,13 @@ public class RecordingToAudioTrackConverterTask extends AsyncTask<Recording, Voi
 
             int bytesRead = 0;
             int readerBufferSize = 100000;
-            int finalReaderBufferSize = (int)file.length();
+            int finalReaderBufferSize = (int) file.length();
             Log.d(TAG, "reading ... ");
 
-            byte[] buffer = new byte[readerBufferSize+1];
+            byte[] buffer = new byte[readerBufferSize + 1];
 
             int offset = 0;
-            while (bytesRead  > -1 && readerBufferSize + offset < finalReaderBufferSize) {
+            while (bytesRead > -1 && readerBufferSize + offset < finalReaderBufferSize) {
                 bytesRead = dataInputStream.read(buffer, offset, readerBufferSize);
                 audioTrack.write(buffer, offset, bytesRead);
                 offset = offset + bytesRead;
@@ -81,19 +81,21 @@ public class RecordingToAudioTrackConverterTask extends AsyncTask<Recording, Voi
         return audioTrack;
     }
 
-    private AudioTrack prepareAudioTrack() {
-        int minBufferSize = 100000;
-        return new AudioTrack(AudioManager.STREAM_MUSIC,    //ok
-                DEFAULT_AUDIO_TRACK_SAMPLE_RATE,            //16 kHz should be ok
-                AudioFormat.CHANNEL_OUT_STEREO,             //ok
-                AudioFormat.ENCODING_PCM_16BIT,             //ok
-                minBufferSize,                              //file is big enough!
-                AudioTrack.MODE_STREAM);
+    private AudioTrack prepareAudioTrack(Configuration configuration) {
+        int streamType = configuration.getStreamType();
+        int sampleRateInHz = configuration.getSamplingRateInHz();
+        int channelConfig = configuration.getChannelConfig();
+        int audioFormat = configuration.getAudioFormat();
+        int minBufferSize = configuration.getAudioTrackBufferSizeInBytes();
+        int mode = configuration.getAudioTrackMode();
+        return new AudioTrack(streamType, sampleRateInHz, channelConfig, minBufferSize, audioFormat, mode);
     }
 
     public interface PlayAudioTrackHolder {
         public void onAudioTrackConverted(AudioTrack track);
 
         public void onConversionFailed();
+
+        public Configuration getConfiguration();
     }
 }
