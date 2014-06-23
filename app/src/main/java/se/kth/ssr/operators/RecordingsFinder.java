@@ -1,4 +1,4 @@
-package se.kth.ssr.operations;
+package se.kth.ssr.operators;
 
 import java.util.List;
 

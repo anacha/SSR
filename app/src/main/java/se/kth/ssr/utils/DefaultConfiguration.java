@@ -12,7 +12,7 @@ import android.media.MediaRecorder;
 public final class DefaultConfiguration implements Configuration{
 
     private static final int SAMPLE_RATE = 16000;
-    private static final int FRAGMENT_DURATION_IN_BYTES = 1000;
+    private static final int FRAGMENT_DURATION_IN_BYTES = 1024;
     private static final int AUDIO_TRACK_BUFFER_SIZE = 100000;
 
     /*Player properties*/

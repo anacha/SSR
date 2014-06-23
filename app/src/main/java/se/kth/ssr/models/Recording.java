@@ -36,14 +36,14 @@ public class Recording implements Parcelable {
     public Recording(String f) {
         mRecordingName = f;
         mFile = new File(f);
-        mSizeInBytes = mFile.getTotalSpace();
+        mSizeInBytes = mFile.length();
     }
 
     public long getSizeInBytes(){
         return mSizeInBytes;
     }
 
-    public String getRecordingName() {
+    public String getRecordingPath() {
         return mRecordingName;
     }
 

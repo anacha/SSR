@@ -1,4 +1,4 @@
-package se.kth.ssr.operations;
+package se.kth.ssr.operators;
 
 /**
  * Created by argychatzi on 3/29/14.

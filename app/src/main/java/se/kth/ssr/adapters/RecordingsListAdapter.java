@@ -28,7 +28,7 @@ public class RecordingsListAdapter extends SSRBaseAdapter {
 
         View view = inflater.inflate(R.layout.voice_sample_list_item, null);
         TextView sampleTitle = (TextView) view.findViewById(R.id.sample_list_item_title);
-        sampleTitle.setText(recording.getRecordingName());
+        sampleTitle.setText(recording.getRecordingPath());
 
         return view;
     }

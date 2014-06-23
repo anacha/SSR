@@ -2,7 +2,7 @@ package se.kth.ssr.test.java.tasks;
 
 import junit.framework.TestCase;
 
-import se.kth.ssr.operations.defaults.DefaultRecordingsFinder;
+import se.kth.ssr.operators.defaults.DefaultRecordingsFinder;
 
 /**
  * Created by argychatzi on 3/23/14.

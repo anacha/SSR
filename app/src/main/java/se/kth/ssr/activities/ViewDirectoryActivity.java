@@ -12,7 +12,7 @@ import java.util.List;
 import se.kth.ssr.R;
 import se.kth.ssr.adapters.RecordingsListAdapter;
 import se.kth.ssr.models.Recording;
-import se.kth.ssr.operations.defaults.DefaultRecordingsFinder;
+import se.kth.ssr.operators.defaults.DefaultRecordingsFinder;
 
 /**
  * Shows the files stored under the SSR directory in the external storage

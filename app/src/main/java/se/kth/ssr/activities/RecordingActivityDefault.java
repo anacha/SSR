@@ -97,7 +97,7 @@ public class RecordingActivityDefault extends DefaultConfigurationActivity {
     }
 
     private void breakRecordingToFragments(Context context, Recording recording) {
-        Intent intent = BreakRecordingToPiecesActivityDefault.getLaunchIntent(context, recording);
+        Intent intent = BreakRecordingToPiecesActivity.getLaunchIntent(context, recording);
         startActivity(intent);
     }
 }

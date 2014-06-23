@@ -39,7 +39,7 @@ public class PlayRecordingActivityDefault extends DefaultConfigurationActivity i
         Recording recording = getIntent().getExtras().getParcelable(VOICE_SAMPLE_BUNDLE_KEY);
 
         TextView titleTextView = (TextView) findViewById(R.id.play_sample_sample_title);
-        titleTextView.setText(recording.getRecordingName());
+        titleTextView.setText(recording.getRecordingPath());
 
         mPrepareAudioTask = new RecordingToAudioTrackConverterTask(this);
         mPrepareAudioTask.execute(recording); //TODO on an executor

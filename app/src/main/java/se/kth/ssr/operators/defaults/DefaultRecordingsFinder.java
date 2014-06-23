@@ -1,4 +1,4 @@
-package se.kth.ssr.operations.defaults;
+package se.kth.ssr.operators.defaults;
 
 import android.content.Context;
 
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import se.kth.ssr.models.Recording;
-import se.kth.ssr.operations.AbstractRecordingOperator;
+import se.kth.ssr.operators.AbstractRecordingOperator;
 import se.kth.ssr.utils.DefaultConfiguration;
 
 /**

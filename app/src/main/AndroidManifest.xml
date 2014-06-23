@@ -34,7 +34,7 @@
             android:label="@string/title_activity_select_voice" >
         </activity>
         <activity
-            android:name=".activities.BreakRecordingToPiecesActivityDefault"
+            android:name=".activities.BreakRecordingToPiecesActivity"
             android:label="@string/title_activity_select_voice" >
         </activity>
 
