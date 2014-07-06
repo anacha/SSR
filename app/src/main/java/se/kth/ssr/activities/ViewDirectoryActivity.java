@@ -11,18 +11,26 @@ import java.util.List;
 
 import se.kth.ssr.R;
 import se.kth.ssr.adapters.RecordingsListAdapter;
+import se.kth.ssr.base.OperationActivity;
 import se.kth.ssr.models.Recording;
-import se.kth.ssr.operators.defaults.DefaultRecordingsFinder;
+import se.kth.ssr.operators.RecordingFinder;
 
 /**
- * Shows the files stored under the SSR directory in the external storage
  * Created by argychatzi on 3/23/14.
  */
-public class ViewDirectoryActivity extends Activity {
+public class ViewDirectoryActivity extends OperationActivity {
 
-    public static Intent getLaunchIntent(Activity activityContext) {
+    private static final String VIEW_PATH_BUNDLE_KEY = "VIEW_PATH_BUNDLE_KEY";
+    private String mPath;
+
+    public static Intent getLaunchIntent(Activity activityContext, String path) {
         Intent launchIntent = new Intent(activityContext, ViewDirectoryActivity.class);
-        return  launchIntent;
+
+        Bundle bundle = new Bundle();
+        bundle.putString(VIEW_PATH_BUNDLE_KEY, path);
+        launchIntent.putExtras(bundle);
+
+        return launchIntent;
     }
 
     @Override
@@ -32,17 +40,19 @@ public class ViewDirectoryActivity extends Activity {
         setContentView(R.layout.activity_select_voice);
         ListView listView = (ListView) findViewById(R.id.select_voice_sample_list);
 
-        DefaultRecordingsFinder recordingsFinder = new DefaultRecordingsFinder(this);
-        final List<Recording> samples = recordingsFinder.getRecordings();
+        mPath = getIntent().getExtras().getString(VIEW_PATH_BUNDLE_KEY);
 
-        RecordingsListAdapter adapter = new RecordingsListAdapter(samples);
+        RecordingFinder recordingsFinder = new RecordingFinder(mPath);
+        final List<Recording> recordings = recordingsFinder.find();
+
+        RecordingsListAdapter adapter = new RecordingsListAdapter(recordings);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Recording sampleSelected = samples.get(position);
-                Intent playSampleIntent = PlayRecordingActivityDefault.getLaunchIntent(ViewDirectoryActivity.this, sampleSelected);
+                Recording sampleSelected = recordings.get(position);
+                Intent playSampleIntent = PlayRecordingActivity.getLaunchIntent(ViewDirectoryActivity.this, sampleSelected);
                 startActivity(playSampleIntent);
             }
         });

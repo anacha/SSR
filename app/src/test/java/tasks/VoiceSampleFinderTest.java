@@ -2,8 +2,6 @@ package se.kth.ssr.test.java.tasks;
 
 import junit.framework.TestCase;
 
-import se.kth.ssr.operators.defaults.DefaultRecordingsFinder;
-
 /**
  * Created by argychatzi on 3/23/14.
  */
@@ -12,24 +10,24 @@ public class VoiceSampleFinderTest extends TestCase {
 
     private static final String TEST_SAMPLE_PATH = "/correct/path";
     private static final String PATH_WITH_NO_SAMPLE_FILES = "/correct/path";
-    private DefaultRecordingsFinder mDefaultDefaultRecordingsFinder;
+    private RecordingsFinder mDefaultDefaultRecordingsFinder;
 
     @Override
     protected void setUp() throws Exception {
-        mDefaultDefaultRecordingsFinder = new DefaultRecordingsFinder("");
+        mDefaultDefaultRecordingsFinder = new RecordingsFinder("");
         super.setUp();
     }
 
     public void testSampleFinderThrowsExceptionWhenPathIsNull(){
-        mDefaultDefaultRecordingsFinder = new DefaultRecordingsFinder("");
+        mDefaultDefaultRecordingsFinder = new RecordingsFinder("");
     }
 
     public void testSampleFinderThrowsExceptionWhenPathIsEmpty(){
-        mDefaultDefaultRecordingsFinder = new DefaultRecordingsFinder("");
+        mDefaultDefaultRecordingsFinder = new RecordingsFinder("");
     }
 
     public void testSampleFinderReturnsNullWhenPathContainsNoFiles(){
-        mDefaultDefaultRecordingsFinder = new DefaultRecordingsFinder(PATH_WITH_NO_SAMPLE_FILES);
+        mDefaultDefaultRecordingsFinder = new RecordingsFinder(PATH_WITH_NO_SAMPLE_FILES);
     }
 
     /*

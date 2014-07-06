@@ -14,7 +14,6 @@ import java.io.File;
 public class Recording implements Parcelable {
 
     private File mFile;
-    private String mRecordingName;
     private long mSizeInBytes;
 
     public static Creator<Recording> CREATOR = new Creator<Recording>() {
@@ -29,13 +28,11 @@ public class Recording implements Parcelable {
 
     private Recording(Parcel in) {
         this.mFile = (File) in.readSerializable();
-        this.mRecordingName = in.readString();
         this.mSizeInBytes = in.readLong();
     }
 
-    public Recording(String f) {
-        mRecordingName = f;
-        mFile = new File(f);
+    public Recording(String path) {
+        mFile = new File(path);
         mSizeInBytes = mFile.length();
     }
 
@@ -44,7 +41,11 @@ public class Recording implements Parcelable {
     }
 
     public String getRecordingPath() {
-        return mRecordingName;
+        return mFile.getAbsolutePath();
+    }
+
+    public File getFile() {
+        return mFile;
     }
 
     @Override
@@ -55,11 +56,6 @@ public class Recording implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeSerializable(this.mFile);
-        dest.writeString(this.mRecordingName);
         dest.writeLong(this.mSizeInBytes);
-    }
-
-    public File getFile() {
-        return mFile;
     }
 }

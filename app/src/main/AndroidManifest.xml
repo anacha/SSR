@@ -27,7 +27,7 @@
         </activity>
 
         <activity
-            android:name=".activities.PlayRecordingActivityDefault"
+            android:name=".activities.PlayRecordingActivity"
             android:label="@string/title_activity_select_voice" >
         </activity>
         <activity
@@ -35,7 +35,7 @@
             android:label="@string/title_activity_select_voice" >
         </activity>
         <activity
-            android:name=".activities.BreakRecordingToPiecesActivity"
+            android:name=".activities.DivideRecordingsActivity"
             android:label="@string/title_activity_select_voice" >
         </activity>
 

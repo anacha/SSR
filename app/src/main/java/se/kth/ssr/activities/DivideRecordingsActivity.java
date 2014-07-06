@@ -7,47 +7,47 @@ import android.os.Bundle;
 
 import java.util.List;
 
+import se.kth.ssr.base.OperationActivity;
 import se.kth.ssr.models.Recording;
 import se.kth.ssr.operators.RecordingDivider;
-import se.kth.ssr.operators.defaults.DefaultRecordingDivider;
-import se.kth.ssr.utils.Configuration;
+import se.kth.ssr.util.operations.DividerConf;
 
 /**
  * Created by argychatzi on 5/18/14.
  */
-public class BreakRecordingToPiecesActivity extends DefaultConfigurationActivity {
+public class DivideRecordingsActivity extends OperationActivity {
 
-    private static final String RECORDING_BUNDLE_KEY = "RECORDING_BUNDLE_KEY";
+    private static final String RECORDING_PATH_BUNDLE_KEY = "RECORDING_PATH_BUNDLE_KEY";
 
     AsyncTask<Recording, Void, List<Recording>> mTask = null;
 
     public static Intent getLaunchIntent(Context context, Recording recording) {
-        Intent intent = new Intent(context, BreakRecordingToPiecesActivity.class);
+        Intent intent = new Intent(context, DivideRecordingsActivity.class);
+
         Bundle bundle = new Bundle();
-
-        bundle.putParcelable(RECORDING_BUNDLE_KEY, recording);
-
+        bundle.putParcelable(RECORDING_PATH_BUNDLE_KEY, recording);
         intent.putExtras(bundle);
+
         return intent;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Recording recording = (Recording) getIntent().getExtras().get(RECORDING_BUNDLE_KEY);
+        Recording recording = (Recording) getIntent().getExtras().get(RECORDING_PATH_BUNDLE_KEY);
 
         if(mTask == null){
             mTask = new AsyncTask<Recording, Void, List<Recording>>() {
                 @Override
                 protected List<Recording> doInBackground(Recording[] params) {
                     Recording recording = params[0];
-                    RecordingDivider divider = new DefaultRecordingDivider(recording.getRecordingPath());
-                    Configuration configuration = getConfiguration();
-                    divider.breakRecordingToPieces(configuration, recording);
-                    return divider.breakRecordingToPieces(configuration, recording);
+
+                    DividerConf dividerConf = getDividerConfiguration();
+                    RecordingDivider divider = new RecordingDivider(dividerConf, recording.getRecordingPath());
+
+                    return divider.divide(recording);
                 }
             };
-
             mTask.execute(recording);
         }
     }

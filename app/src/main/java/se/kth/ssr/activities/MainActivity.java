@@ -6,23 +6,28 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import org.joda.time.LocalTime;
+
 import se.kth.ssr.R;
-import se.kth.ssr.utils.Configuration;
-import se.kth.ssr.utils.DefaultConfiguration;
 
 public class MainActivity extends Activity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final String VIEW_RECORDINGS_PATH = getExternalFilesDir(null).getAbsolutePath();
+        final String CAPTURE_RECORDING_PATH = VIEW_RECORDINGS_PATH + "/Rec" + LocalTime.now().toString() + ".3gp";
+
+
         Button viewRecordingsButton = (Button) findViewById(R.id.fragment_main_go_to_directory);
         viewRecordingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent selectVoiceIntent = ViewDirectoryActivity.getLaunchIntent(MainActivity.this);
-                startActivity(selectVoiceIntent);
+                Intent viewRecordingsDirectoryIntent = ViewDirectoryActivity.getLaunchIntent(MainActivity.this, VIEW_RECORDINGS_PATH);
+                startActivity(viewRecordingsDirectoryIntent);
             }
         });
 
@@ -30,9 +35,7 @@ public class MainActivity extends Activity {
         launchRecordingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Configuration configuration = DefaultConfiguration.getInstance(MainActivity.this);
-                String path = configuration.getBaseHomeDirectory();
-                Intent startRecordingIntent = RecordingActivityDefault.getLaunchIntent(MainActivity.this, path);
+                Intent startRecordingIntent = RecordingActivity.getLaunchIntent(MainActivity.this, CAPTURE_RECORDING_PATH);
                 startActivity(startRecordingIntent);
             }
         });

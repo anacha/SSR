@@ -13,8 +13,8 @@ public abstract class AbstractRecordingOperator {
         mPath = path;
     }
 
-    public void setSamplerPath(String path){
-        mPath = path;
+    public String getPathOfOperations() {
+        return mPath;
     }
 
 }
