@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pre-dex-items>
+
+    <item
+        dex="/Users/argychatzi/AndroidStudioProjects/SeamlessSpeakerRecognitionSSR/app/build/intermediates/pre-dexed/debug/joda-time-2.2-0742dc121c4f4b71f4de38a08e318dff964d14a9.jar"
+        jar="/Users/argychatzi/.gradle/caches/modules-2/files-2.1/joda-time/joda-time/2.2/a5f29a7acaddea3f4af307e8cf2d0cc82645fd7d/joda-time-2.2.jar"
+        jumboMode="false"
+        revision="19.1.0"
+        sha1="a5f29a7acaddea3f4af307e8cf2d0cc82645fd7d"/>
+
+</pre-dex-items>

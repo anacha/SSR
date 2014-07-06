@@ -35,6 +35,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     unitTestCompile 'org.mockito:mockito-all:1.9.5'
     unitTestCompile 'org.robolectric:robolectric:2.+'
+    compile "joda-time:joda-time:2.2"
 }
 
 
