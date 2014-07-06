@@ -1,27 +1,22 @@
 package se.kth.ssr.util.operations;
 
-import android.content.Context;
 import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
 
-import se.kth.ssr.util.operations.generic.OperatorConfiguration;
+import se.kth.ssr.util.operations.generic.SamplingConf;
 
 /**
  * Class contains all the settings around the creating of a recording
  * Created by argychatzi on 6/24/14.
  */
-public class CreatorConfiguration extends OperatorConfiguration {
+public class PlayerConf extends SamplingConf {
 
     private static final int STREAM_TYPE = AudioManager.STREAM_MUSIC;
     private static final int CHANNEL_CONFIG = AudioFormat.CHANNEL_OUT_STEREO;
     private static final int AUDIO_FORMAT = AudioFormat.ENCODING_PCM_16BIT;
     private static final int AUDIO_TRACK_MODE = AudioTrack.MODE_STREAM;
     private static final int AUDIO_TRACK_BUFFER_SIZE = 100000;
-
-    public CreatorConfiguration(Context context) {
-        super(context);
-    }
 
     public static int getStreamType() {
         return STREAM_TYPE;
@@ -39,8 +34,7 @@ public class CreatorConfiguration extends OperatorConfiguration {
         return AUDIO_TRACK_MODE;
     }
 
-    public static int getAudioTrackBufferSizeInBytes() {
+    public static int getMaxAudioTrackBufferSizeInBytes() {
         return AUDIO_TRACK_BUFFER_SIZE;
     }
-
 }

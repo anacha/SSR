@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import se.kth.ssr.models.Recording;
-import se.kth.ssr.util.operations.DividerConfiguration;
+import se.kth.ssr.util.operations.DividerConf;
 
 /**
  * Created by argychatzi on 3/29/14.
@@ -21,17 +21,16 @@ import se.kth.ssr.util.operations.DividerConfiguration;
 public class RecordingDivider extends RecordingCreator {
 
     private static final String TAG = "DefaultRecordingDivider";
-    private final DividerConfiguration mDividerConfiguration;
+    private final DividerConf mDividerConf;
 
-
-    public RecordingDivider(DividerConfiguration configuration) {
-        super(configuration);
-        mDividerConfiguration = configuration;
+    public RecordingDivider(DividerConf configuration, String path) {
+        super(configuration, path);
+        mDividerConf = configuration;
     }
 
     public List<Recording> divide(Recording originalRecording) {
 
-        int fragmentSize = mDividerConfiguration.getFragmentSizeInBytes();
+        int fragmentSize = mDividerConf.getFragmentSizeInBytes();
         int numberOfFragments = calculateNumberOfFragments(originalRecording, fragmentSize);
         int offset = 0;
 
@@ -47,7 +46,7 @@ public class RecordingDivider extends RecordingCreator {
                 byte[] bytes = new byte[fragmentSize];
                 dataInputStream.read(bytes, 0, fragmentSize);
 
-                String fragmentName = originalRecording.getRecordingPath().replace(".3gp", "pt" + i + ".3gp");
+                String fragmentName = originalRecording.getRecordingPath().replace(".3gp", "_pt" + i + ".3gp");
 
                 OutputStream outputStream = new FileOutputStream(fragmentName);
                 DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
@@ -59,40 +58,6 @@ public class RecordingDivider extends RecordingCreator {
             e.printStackTrace();
         }
         return pieces;
-    }
-
-    private Recording createRecordingFromBytes(String recordingName, byte[] buffer) throws IOException {
-        Recording result = null;
-
-        OutputStream outputStream = new FileOutputStream(recordingName);
-        DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
-
-        dataOutputStream.write(buffer, 0, buffer.length);
-
-        result = new Recording(recordingName);
-        return result;
-    }
-
-    private byte[] copyBytesFromRecording(Recording recording, int offset, int numberOfBytesToCopy) throws IOException {
-
-
-        Log.d(TAG, "recording.getSizeInBytes()" + recording.getSizeInBytes());
-
-        if (numberOfBytesToCopy < 0) {
-            throw new IOException("numberOfBytesToCopy must be > 0");
-        } else if (offset < 0) {
-            throw new IOException("offset must be > 0");
-        } else if (recording == null) {
-            throw new IOException("recording can't be null!");
-        } else {
-            byte[] result = new byte[numberOfBytesToCopy];
-
-            InputStream inputStream = new FileInputStream(recording.getRecordingPath());
-            DataInputStream dataInputStream = new DataInputStream(inputStream);
-
-            dataInputStream.read(result, offset, numberOfBytesToCopy);
-            return result;
-        }
     }
 
     private int calculateNumberOfFragments(Recording originalRecording, int fragmentSize) {

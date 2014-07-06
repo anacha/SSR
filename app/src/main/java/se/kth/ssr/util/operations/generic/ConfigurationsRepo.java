@@ -2,9 +2,9 @@ package se.kth.ssr.util.operations.generic;
 
 import android.content.Context;
 
-import se.kth.ssr.util.operations.CreatorConfiguration;
-import se.kth.ssr.util.operations.DividerConfiguration;
-import se.kth.ssr.util.operations.RecorderConfiguration;
+import se.kth.ssr.util.operations.DividerConf;
+import se.kth.ssr.util.operations.PlayerConf;
+import se.kth.ssr.util.operations.RecorderConf;
 
 /**
  * Holder of all kind of operation configurations
@@ -12,25 +12,28 @@ import se.kth.ssr.util.operations.RecorderConfiguration;
  */
 public class ConfigurationsRepo {
 
-    private DividerConfiguration mDividerConfiguration;
-    private CreatorConfiguration mCreatorConfiguration;
-    private RecorderConfiguration mRecorderConfiguration;
+    private DividerConf mDividerConf;
+    private RecorderConf mRecorderConfiguration;
+    private PlayerConf mPlayerConfiguration;
 
     public ConfigurationsRepo(Context context) {
-        mDividerConfiguration   = new DividerConfiguration(context);
-        mCreatorConfiguration   = new CreatorConfiguration(context);
-        mRecorderConfiguration  = new RecorderConfiguration(context);
+
+        String path = context.getExternalFilesDir(null).getAbsolutePath();
+
+        mDividerConf = new DividerConf();
+        mPlayerConfiguration = new PlayerConf();
+        mRecorderConfiguration = new RecorderConf();
     }
 
-    public DividerConfiguration getDividerConfiguration() {
-        return mDividerConfiguration;
+    public DividerConf getDividerConfiguration() {
+        return mDividerConf;
     }
 
-    public CreatorConfiguration getCreatorConfiguration() {
-        return mCreatorConfiguration;
+    public PlayerConf getCreatorConfiguration() {
+        return mPlayerConfiguration;
     }
 
-    public RecorderConfiguration getRecorderConfiguration() {
+    public RecorderConf getRecorderConfiguration() {
         return mRecorderConfiguration;
     }
 }

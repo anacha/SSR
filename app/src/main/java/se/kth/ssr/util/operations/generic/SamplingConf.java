@@ -3,7 +3,7 @@ package se.kth.ssr.util.operations.generic;
 /**
  * Created by argychatzi on 7/6/14.
  */
-public class SamplingConfiguration {
+public class SamplingConf {
 
     private int SAMPLING_RATE_IN_HZ = 16000;
 
