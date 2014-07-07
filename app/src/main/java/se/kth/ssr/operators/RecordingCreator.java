@@ -1,9 +1,7 @@
 package se.kth.ssr.operators;
 
-import java.io.File;
-
 import se.kth.ssr.models.Recording;
-import se.kth.ssr.util.operations.PlayerConf;
+import se.kth.ssr.util.operations.player.ATPlayerConf;
 
 /**
  * Created by argychatzi on 6/23/14.
@@ -12,10 +10,10 @@ public class RecordingCreator extends AbstractRecordingOperator {
 
     private static final String TAG = "RecordingCreator";
 
-    private PlayerConf mConfiguration;
+    private ATPlayerConf mConfiguration;
     protected Recording mRecording;
 
-    public RecordingCreator(PlayerConf configuration, String recordingPath) {
+    public RecordingCreator(ATPlayerConf configuration, String recordingPath) {
         super(recordingPath);
         mConfiguration = configuration;
         mRecording = new Recording(recordingPath);

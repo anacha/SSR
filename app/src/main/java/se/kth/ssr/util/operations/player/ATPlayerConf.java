@@ -1,4 +1,4 @@
-package se.kth.ssr.util.operations;
+package se.kth.ssr.util.operations.player;
 
 import android.media.AudioFormat;
 import android.media.AudioManager;
@@ -10,7 +10,7 @@ import se.kth.ssr.util.operations.generic.SamplingConf;
  * Class contains all the settings around the creating of a recording
  * Created by argychatzi on 6/24/14.
  */
-public class PlayerConf extends SamplingConf {
+public class ATPlayerConf extends SamplingConf {
 
     private static final int STREAM_TYPE = AudioManager.STREAM_MUSIC;
     private static final int CHANNEL_CONFIG = AudioFormat.CHANNEL_OUT_STEREO;

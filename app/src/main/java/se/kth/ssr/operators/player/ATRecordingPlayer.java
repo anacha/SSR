@@ -1,7 +1,6 @@
-package se.kth.ssr.operators;
+package se.kth.ssr.operators.player;
 
 import android.media.AudioTrack;
-import android.util.Log;
 
 import java.io.DataInputStream;
 import java.io.File;
@@ -10,18 +9,19 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-import se.kth.ssr.util.operations.PlayerConf;
+import se.kth.ssr.operators.AbstractRecordingOperator;
+import se.kth.ssr.util.operations.player.ATPlayerConf;
 
 /**
  * Created by argychatzi on 7/6/14.
  */
-public class RecordingPlayer extends AbstractRecordingOperator {
+public class ATRecordingPlayer extends AbstractRecordingOperator {
 
     private static final String TAG = "RecordingPlayer";
-    private final PlayerConf mConfiguration;
+    private final ATPlayerConf mConfiguration;
     private AudioTrack mAudioTrack;
 
-    public RecordingPlayer(PlayerConf configuration, String path) {
+    public ATRecordingPlayer(ATPlayerConf configuration, String path) {
         super(path);
         mConfiguration = configuration;
         File f = new File(path);
@@ -70,7 +70,7 @@ public class RecordingPlayer extends AbstractRecordingOperator {
         return bytesRead > -1;
     }
 
-    private AudioTrack initAudioTrack(PlayerConf configuration) {
+    private AudioTrack initAudioTrack(ATPlayerConf configuration) {
         int streamType = configuration.getStreamType();
         int sampleRateInHz = configuration.getSamplingRateInHz();
         int channelConfig = configuration.getChannelConfig();

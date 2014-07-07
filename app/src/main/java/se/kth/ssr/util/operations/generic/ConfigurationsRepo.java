@@ -2,9 +2,10 @@ package se.kth.ssr.util.operations.generic;
 
 import android.content.Context;
 
+import se.kth.ssr.util.operations.player.ATPlayerConf;
 import se.kth.ssr.util.operations.DividerConf;
-import se.kth.ssr.util.operations.PlayerConf;
 import se.kth.ssr.util.operations.RecorderConf;
+import se.kth.ssr.util.operations.player.MPPlayerConf;
 
 /**
  * Holder of all kind of operation configurations
@@ -14,23 +15,29 @@ public class ConfigurationsRepo {
 
     private DividerConf mDividerConf;
     private RecorderConf mRecorderConfiguration;
-    private PlayerConf mPlayerConfiguration;
+    private ATPlayerConf mATPlayerConfiguration;
+    private MPPlayerConf mMPPlayerConfiguration;
 
     public ConfigurationsRepo(Context context) {
 
         String path = context.getExternalFilesDir(null).getAbsolutePath();
 
         mDividerConf = new DividerConf();
-        mPlayerConfiguration = new PlayerConf();
         mRecorderConfiguration = new RecorderConf();
+        mATPlayerConfiguration = new ATPlayerConf();
+        mMPPlayerConfiguration = new MPPlayerConf();
+    }
+
+    public MPPlayerConf getMPPlayerConfiguration() {
+        return mMPPlayerConfiguration;
+    }
+
+    public ATPlayerConf getATPlayerConfiguration() {
+        return mATPlayerConfiguration;
     }
 
     public DividerConf getDividerConfiguration() {
         return mDividerConf;
-    }
-
-    public PlayerConf getCreatorConfiguration() {
-        return mPlayerConfiguration;
     }
 
     public RecorderConf getRecorderConfiguration() {
