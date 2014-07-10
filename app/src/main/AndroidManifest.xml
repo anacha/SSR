@@ -1,42 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="se.kth.ssr" >
+          package="se.kth.ssr">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
 
     <application
         android:name=".base.SSRApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
+
+
+        <service android:name=".services.NoiseDetectionService"/>
+
         <activity
             android:name="se.kth.ssr.activities.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
             android:name=".activities.ViewDirectoryActivity"
-            android:label="@string/title_activity_select_voice" >
+            android:label="@string/title_activity_select_voice">
         </activity>
 
         <activity
             android:name=".activities.PlayRecordingActivity"
-            android:label="@string/title_activity_select_voice" >
+            android:label="@string/title_activity_select_voice">
         </activity>
         <activity
             android:name=".activities.RecordingActivity"
-            android:label="@string/title_activity_select_voice" >
+            android:label="@string/title_activity_select_voice">
         </activity>
         <activity
             android:name=".activities.DivideRecordingsActivity"
-            android:label="@string/title_activity_select_voice" >
+            android:label="@string/title_activity_select_voice">
         </activity>
 
     </application>

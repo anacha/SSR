@@ -1,12 +1,11 @@
 package se.kth.ssr.operators;
 
-import android.util.Log;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import se.kth.ssr.models.Recording;
+import se.kth.ssr.dataprovider.models.Recording;
+
 
 /**
  * Created by argychatzi on 3/23/14.

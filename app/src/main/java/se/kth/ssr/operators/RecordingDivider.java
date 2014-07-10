@@ -1,7 +1,5 @@
 package se.kth.ssr.operators;
 
-import android.util.Log;
-
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.FileInputStream;
@@ -52,8 +50,14 @@ public class RecordingDivider extends RecordingCreator {
                 DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
                 dataOutputStream.write(bytes, 0, bytes.length);
 
+                dataOutputStream.close();
+                outputStream.close();
+
                 pieces.add(new Recording(fragmentName));
             }
+            inputStream.close();
+            dataInputStream.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         }

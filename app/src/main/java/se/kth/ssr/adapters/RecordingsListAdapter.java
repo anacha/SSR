@@ -9,7 +9,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import se.kth.ssr.R;
-import se.kth.ssr.models.Recording;
+import se.kth.ssr.dataprovider.models.Recording;
 
 /**
  * Created by argychatzi on 3/29/14.

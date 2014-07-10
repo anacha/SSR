@@ -9,7 +9,7 @@ import android.widget.Button;
 
 import se.kth.ssr.R;
 import se.kth.ssr.base.BaseActivity;
-import se.kth.ssr.models.Recording;
+import se.kth.ssr.dataprovider.models.Recording;
 import se.kth.ssr.operators.RecordingRecorder;
 import se.kth.ssr.util.operations.RecorderConf;
 

@@ -14,19 +14,24 @@ public class MPRecordingPlayer extends RecordingCreator {
 
     private MediaPlayer mediaPlayer;
 
-    public MPRecordingPlayer(MPPlayerConf configuration, String recordingPath) {
+    private MediaPlayer.OnPreparedListener mListener;
+
+    public MPRecordingPlayer(MediaPlayer.OnPreparedListener listener, MPPlayerConf configuration, String recordingPath) {
         super(configuration, recordingPath);
+        mListener = listener;
         mediaPlayer = initMediaPlayer(configuration, recordingPath);
     }
 
     private MediaPlayer initMediaPlayer(MPPlayerConf configuration, String recordingPath) {
         mediaPlayer = new MediaPlayer();
 
+        mediaPlayer.reset();
         int audioStreamType = configuration.getStreamType();
 
         try {
             mediaPlayer.setAudioStreamType(audioStreamType);
             mediaPlayer.setDataSource(recordingPath);
+            mediaPlayer.setOnPreparedListener(mListener);
             mediaPlayer.prepare();
         } catch (IOException e) {
             e.printStackTrace();

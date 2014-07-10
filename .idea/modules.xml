@@ -4,6 +4,10 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SeamlessSpeakerRecognitionSSR.iml" filepath="$PROJECT_DIR$/SeamlessSpeakerRecognitionSSR.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dataPersistance/dataPersistance.iml" filepath="$PROJECT_DIR$/dataPersistance/dataPersistance.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dataProvider/dataProvider.iml" filepath="$PROJECT_DIR$/dataProvider/dataProvider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/noiseLevelDetector/noiseLevelDetector.iml" filepath="$PROJECT_DIR$/noiseLevelDetector/noiseLevelDetector.iml" />
+      <module fileurl="file://$PROJECT_DIR$/speakerRecognition/speakerRecognition.iml" filepath="$PROJECT_DIR$/speakerRecognition/speakerRecognition.iml" />
     </modules>
   </component>
 </project>
